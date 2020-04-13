@@ -1,0 +1,35 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "E-Commerce CMS",
+  "main": "app.js",
+  "scripts": {
+    "lint": "eslint .",
+    "prepush": "npm run lint:fix && npm run test",
+    "lint:fix": "eslint . --fix",
+    "start": "node app.js",
+    "dev": "NODE_ENV=development nodemon app.js",
+    "gen:dev": "NODE_ENV=development sequelize db:create && sequelize db:migrate",
+    "gen:test": "NODE_ENV=test sequelize db:create && sequelize db:migrate",
+    "test": "NODE_ENV=test jest --runInBand --detectOpenHandles --forceExit",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [],
+  "author": "Fadhil Muhammad",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.0.2",
+    "sequelize": "^5.21.6"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "husky": "^4.2.5",
+    "jest": "^25.3.0",
+    "supertest": "^4.0.2"
+  }
+}
