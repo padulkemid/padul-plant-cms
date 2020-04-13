@@ -16,6 +16,11 @@
   "directories": {
     "test": "tests"
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run test && npm run lint:fix"
+    }
+  },
   "keywords": [],
   "author": "Fadhil Muhammad",
   "license": "ISC",
