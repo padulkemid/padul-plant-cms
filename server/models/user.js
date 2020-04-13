@@ -50,6 +50,7 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      UserProductId: DataTypes.INTEGER,
     },
     { sequelize }
   );
@@ -64,3 +65,4 @@ module.exports = (sequelize, DataTypes) => {
   };
   return User;
 };
+

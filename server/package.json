@@ -8,10 +8,13 @@
     "lint:fix": "eslint . --fix",
     "start": "node app.js",
     "dev": "NODE_ENV=development nodemon app.js",
-    "gen:dev": "NODE_ENV=development sequelize db:create && sequelize db:migrate",
-    "gen:test": "NODE_ENV=test sequelize db:create && sequelize db:migrate",
-    "test": "NODE_ENV=test jest --runInBand --detectOpenHandles --forceExit",
+    "gen:dev": "sequelize db:create && sequelize db:migrate",
+    "gen:test": "NODE_ENV=test sequelize db:create && NODE_ENV=test sequelize db:migrate",
+    "test": "NODE_ENV=test sequelize db:seed:all && NODE_ENV=test jest --runInBand --detectOpenHandles --forceExit",
     "test:watch": "jest --watch"
+  },
+  "directories": {
+    "test": "tests"
   },
   "keywords": [],
   "author": "Fadhil Muhammad",
