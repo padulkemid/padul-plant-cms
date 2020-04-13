@@ -5,7 +5,6 @@
   "main": "app.js",
   "scripts": {
     "lint": "eslint .",
-    "prepush": "npm run lint:fix && npm run test",
     "lint:fix": "eslint . --fix",
     "start": "node app.js",
     "dev": "NODE_ENV=development nodemon app.js",

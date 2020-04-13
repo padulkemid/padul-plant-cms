@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
-      'User',
+      'Users',
       [
         {
           email: 'admin@admin.id',
@@ -29,7 +29,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('User', null, {});
+    return queryInterface.bulkDelete('Users', null, {});
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.

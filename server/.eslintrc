@@ -12,6 +12,6 @@
   "rules": {
     "import/no-dynamic-require": "off",
     "no-unused-vars": "warn",
-    "camelcase": 1
+    "camelcase": 0
   }
 }
