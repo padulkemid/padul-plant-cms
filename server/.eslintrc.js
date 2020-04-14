@@ -11,5 +11,6 @@ module.exports = {
     'import/no-dynamic-require': 'off',
     'no-unused-vars': 'warn',
     camelcase: 'off',
+    'consistent-return': 'off',
   },
 };
