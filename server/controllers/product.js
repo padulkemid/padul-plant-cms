@@ -14,7 +14,6 @@ class ProductController {
 
   static newItem(req, res, next) {
     const newData = req.body;
-    console.log(newData);
 
     Product.create(newData)
       .then((created) => {

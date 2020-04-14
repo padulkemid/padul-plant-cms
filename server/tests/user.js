@@ -1,8 +1,6 @@
 const request = require('supertest');
 const app = require('../app_test');
-const { User, sequelize } = require('../models');
-
-const { queryInterface } = sequelize;
+const { User } = require('../models');
 
 const correctForm = {
   email: 'padoel@cenah.com',
@@ -18,10 +16,10 @@ function login() {
       .catch((e) => done(e));
   });
 
-  describe('user and admin login', function () {
+  describe('user and admin login', () => {
     // admin login res
-    describe('admin login', function () {
-      it('should send an token object with status code 200, representing admin message', function (done) {
+    describe('admin login', () => {
+      it('should send an token object with status code 200, representing admin message', (done) => {
         request(app)
           .post('/login')
           .send({
@@ -42,8 +40,8 @@ function login() {
     });
 
     // user login res
-    describe('user login', function () {
-      it('should send an token object with status code 200, representing success message', function (done) {
+    describe('user login', () => {
+      it('should send an token object with status code 200, representing success message', (done) => {
         request(app)
           .post('/login')
           .send(correctForm)
@@ -61,8 +59,8 @@ function login() {
 
     // errors
     // wrong username
-    describe('normal login', function () {
-      it('should throw an error because username is not found', function (done) {
+    describe('normal login', () => {
+      it('should throw an error because username is not found', (done) => {
         request(app)
           .post('/login')
           .send({
@@ -81,8 +79,8 @@ function login() {
     });
 
     // wrong password
-    describe('normal login', function () {
-      it('should throw an error because password is wrong', function (done) {
+    describe('normal login', () => {
+      it('should throw an error because password is wrong', (done) => {
         request(app)
           .post('/login')
           .send({
@@ -94,6 +92,47 @@ function login() {
             expect(status).toBe(404);
             expect(body).not.toHaveProperty('token');
             expect(body).toHaveProperty('message');
+            done();
+          })
+          .catch(done);
+      });
+    });
+  });
+
+  describe('register new user', () => {
+    // add new user
+    describe('add new user', () => {
+      it('should add new user in database and send status of 201 also a success message', (done) => {
+        request(app)
+          .post('/register')
+          .send(correctForm)
+          .then((res) => {
+            const { body, status } = res;
+            expect(status).toBe(201);
+            expect(body).toHaveProperty('success');
+            expect(body).toHaveProperty('message');
+            expect(body).not.toHaveProperty('token');
+            done();
+          })
+          .catch(done);
+      });
+    });
+
+    // bad request on register
+    describe('add new user but bad form request', () => {
+      it('should not add new user and send error', (done) => {
+        request(app)
+          .post('/register')
+          .send({
+            email: '',
+            password: '1',
+          })
+          .then((res) => {
+            const { body, status } = res;
+            expect(status).toBe(400);
+            expect(body).toHaveProperty('message');
+            expect(body).not.toHaveProperty('token');
+            expect(body).not.toHaveProperty('success');
             done();
           })
           .catch(done);

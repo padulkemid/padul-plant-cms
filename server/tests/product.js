@@ -71,6 +71,43 @@ function product() {
           .catch(done);
       });
     });
+
+    // edit by id
+    describe('edit product by id', () => {
+      it('should receive a status of 201 and successfully edited a data within given id', (done) => {
+        request(app)
+          .put('/items/1')
+          .set('token', global.token)
+          .set('Content-Type', 'application/json')
+          .send(correctForm)
+          .then((res) => {
+            const { body, status } = res;
+            expect(status).toBe(201);
+            expect(body).toHaveProperty('success');
+            expect(body).toHaveProperty('message');
+            done();
+          })
+          .catch(done);
+      });
+    });
+
+    // delete by id
+    describe('delete product by id', () => {
+      it('should receive a status of 201 and successfully deleted a data within given id', (done) => {
+        request(app)
+          .delete('/items/1')
+          .set('token', global.token)
+          .set('Content-Type', 'application/json')
+          .then((res) => {
+            const { body, status } = res;
+            expect(status).toBe(201);
+            expect(body).toHaveProperty('deleted');
+            expect(body).toHaveProperty('message');
+            done();
+          })
+          .catch(done);
+      });
+    });
   });
 }
 

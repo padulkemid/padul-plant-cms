@@ -57,7 +57,7 @@ class UserController {
 
     User.create(newData)
       .then((success) => {
-        res.status(201).json({ message: 'Succesfully created new User!' });
+        res.status(201).json({ message: 'Succesfully created new User!', success });
       })
       .catch(next);
   }

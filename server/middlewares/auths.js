@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { User, Product } = require('../models');
+const { Product } = require('../models');
 
 function authentication(req, res, next) {
   const { token } = req.headers;
@@ -16,7 +16,7 @@ function authentication(req, res, next) {
 }
 
 function authorization(req, res, next) {
-  const { UserId, Role } = req;
+  const { Role } = req;
   const { id } = req.params;
 
   if (Role === 'admin') {
