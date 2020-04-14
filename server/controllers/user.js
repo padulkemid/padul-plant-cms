@@ -1,6 +1,6 @@
+const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 const { decryptPassword } = require('../helpers/bcrypt');
-const jwt = require('jsonwebtoken');
 
 class UserController {
   static async login(req, res, next) {

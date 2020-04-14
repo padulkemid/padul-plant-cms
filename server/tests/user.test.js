@@ -1,6 +1,7 @@
 const request = require('supertest');
 const app = require('../app_test');
 const { User, sequelize } = require('../models');
+
 const { queryInterface } = sequelize;
 
 beforeAll((done) => {
@@ -85,7 +86,7 @@ describe('user and admin login', function () {
     });
   });
 
-  //wrong password
+  // wrong password
   describe('normal login', function () {
     it('should throw an error because password is wrong', function (done) {
       request(app)
