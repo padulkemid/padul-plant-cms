@@ -37,10 +37,7 @@ module.exports = (sequelize, DataTypes) => {
           isInt: {
             msg: 'Price must be a number!',
           },
-          min: {
-            args: 0,
-            msg: 'Price cannot be lower than zero!',
-          },
+          min: 5000,
         },
       },
       stock: {
@@ -51,10 +48,7 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: {
             msg: 'Stock cannot be empty, if stocks are depleted please input 0',
           },
-          min: {
-            args: 0,
-            msg: 'Cannot be more lower than zero!',
-          },
+          min: 0,
         },
       },
       UserProductId: DataTypes.INTEGER,
@@ -66,4 +60,3 @@ module.exports = (sequelize, DataTypes) => {
   };
   return Product;
 };
-

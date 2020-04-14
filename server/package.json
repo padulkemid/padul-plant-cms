@@ -8,10 +8,13 @@
     "lint:fix": "eslint . --fix",
     "start": "node app.js",
     "dev": "NODE_ENV=development nodemon app.js",
-    "gen:dev": "sequelize db:create && sequelize db:migrate",
-    "gen:test": "NODE_ENV=test sequelize db:create && NODE_ENV=test sequelize db:migrate",
-    "test": "NODE_ENV=test sequelize db:seed:all && NODE_ENV=test jest --runInBand --detectOpenHandles --forceExit",
-    "test:watch": "jest --watch"
+    "db:dev": "sequelize db:create && sequelize db:migrate",
+    "test:db_gen": "NODE_ENV=test sequelize db:create",
+    "test:db_data": "NODE_ENV=test sequelize db:migrate && NODE_ENV=test sequelize db:seed:all ",
+    "test:db_gen_data": "npm run test:db_gen && npm run test:db_data",
+    "test:db_pristine": "NODE_ENV=test sequelize db:drop",
+    "test:db_jest": "npm run test:db_gen_data && NODE_ENV=test jest --runInBand --detectOpenHandles --forceExit",
+    "test": "npm run test:db_jest && npm run test:db_pristine"
   },
   "directories": {
     "test": "tests"
