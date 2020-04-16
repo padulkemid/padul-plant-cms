@@ -23,6 +23,7 @@ export default {
   },
   created() {
     this.$store.dispatch('getItems');
+    this.$store.dispatch('getUsers');
   },
 };
 </script>

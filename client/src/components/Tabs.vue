@@ -8,6 +8,7 @@
 
       <b-tab-item label="Users">
         <h1 class="subtitle">List of Users</h1>
+        <Table :items="'users'"></Table>
       </b-tab-item>
     </b-tabs>
   </section>

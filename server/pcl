@@ -36,6 +36,14 @@ list(){
     -v "$URL/items"
 }
 
+get_users(){
+  curl -X GET \
+    -H 'Content-Type: application/json' \
+    -H "token: $TOKEN" \
+    -v "$URL/users"
+}
+
+
 list_id() {
   curl -X GET \
     -H 'Content-Type: application/json' \
@@ -65,5 +73,7 @@ TOKEN=$(login_user user_login_test.json | jq -r .token)
 # ====================================================
 # login_user user_login.json | jq '.'
 # list | jq '.'
-create_item data_test.json | jq '.'
+# create_item data_test.json | jq '.'
 # list_id 2 | jq '.'
+get_users | jq '.'
+# create_user data_test.json | jq '.'

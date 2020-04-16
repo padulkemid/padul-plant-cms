@@ -3,12 +3,14 @@ import Vuex from 'vuex';
 
 import { login } from '@/functions/login.js';
 import { products } from '@/functions/items.js';
+import { users } from '@/functions/user.js';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
     items: [],
+    users: [],
     isLoggedIn: false,
     form: {
       username: '',
@@ -27,6 +29,9 @@ const store = new Vuex.Store({
     SET_ITEMS(state, payload) {
       state.items = payload;
     },
+    SET_USERS(state, payload) {
+      state.users = payload;
+    },
   },
   actions: {
     postLogin({ commit }, payload) {
@@ -44,6 +49,15 @@ const store = new Vuex.Store({
       products()
         .then((res) => {
           commit('SET_ITEMS', res.products);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+    getUsers({ commit }) {
+      users()
+        .then((res) => {
+          commit('SET_USERS', res.users);
         })
         .catch((e) => {
           console.log(e);
