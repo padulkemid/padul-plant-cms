@@ -55,8 +55,9 @@ create_item() {
 
 
 # address
-URL="http://localhost:3000"
-TOKEN=$(login_user user_login.json | jq -r .token)
+# URL="http://localhost:3000"
+URL="https://paduljualan.herokuapp.com"
+TOKEN=$(login_user user_login_test.json | jq -r .token)
 
 # script
 # I used a file called test.json to send the request
@@ -64,5 +65,5 @@ TOKEN=$(login_user user_login.json | jq -r .token)
 # ====================================================
 # login_user user_login.json | jq '.'
 # list | jq '.'
-# create_item data_test.json | jq '.'
-list_id 2 | jq '.'
+create_item data_test.json | jq '.'
+# list_id 2 | jq '.'

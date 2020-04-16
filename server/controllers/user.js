@@ -61,6 +61,14 @@ class UserController {
       })
       .catch(next);
   }
+
+  static getUsers(req, res, next) {
+    User.findAll()
+      .then((users) => {
+        res.status(200).json({ message: 'Successfully get all users!', users });
+      })
+      .catch(next);
+  }
 }
 
 module.exports = UserController;
