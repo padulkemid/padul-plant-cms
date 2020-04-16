@@ -1,35 +1,21 @@
 <template>
-  <section class="hero is-primary is-fullheight">
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <h1 class="title">
-          Sign In
-        </h1>
-        <h2 class="subtitle">
-          Access your item, <i>Admin</i>.<br />
-          Enter your credentials here &darr;
-        </h2>
-
-        <div id="form">
-          <b-field label="Username" :label-position="labelPosition">
-            <b-input v-model="form.username" placeholder="padulkemid" maxlength="30"></b-input>
-          </b-field>
-          <b-field label="Password" :label-position="labelPosition">
-            <b-input
-              v-model="form.password"
-              placeholder="Password here...."
-              type="password"
-              maxlength="30"
-            >
-            </b-input>
-          </b-field>
-          <b-button @click="dispatchToState" type="is-info" expanded>
-            Sign In
-          </b-button>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div id="form">
+    <b-field label="Username" :label-position="labelPosition">
+      <b-input v-model="form.username" placeholder="Username here...." maxlength="30"></b-input>
+    </b-field>
+    <b-field label="Password" :label-position="labelPosition">
+      <b-input
+        v-model="form.password"
+        placeholder="Password here...."
+        type="password"
+        maxlength="30"
+      >
+      </b-input>
+    </b-field>
+    <b-button @click="dispatchToState" type="is-warning" expanded>
+      Sign In
+    </b-button>
+  </div>
 </template>
 
 <script>

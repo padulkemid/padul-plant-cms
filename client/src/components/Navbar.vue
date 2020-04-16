@@ -3,14 +3,14 @@
     <b-navbar id="nav" type="is-primary" spaced>
       <template slot="brand">
         <b-navbar-item>
-          <h1 class="title has-text-white">Padul Jualan 🍀</h1>
+          <h1 class="title has-text-white">Padul Jualan ( CMS ) 🍀</h1>
         </b-navbar-item>
       </template>
-      <template slot="end">
+      <template slot="end" v-if="showLogout">
         <b-navbar-item tag="router-link" :to="{ path: '/home' }">
           Home
         </b-navbar-item>
-        <b-navbar-item v-if="showLogout" tag="div">
+        <b-navbar-item tag="div">
           <div class="buttons">
             <b-button @click="logout" type="is-danger" expanded outlined>
               Log Out
@@ -66,6 +66,6 @@ export default {
 
 <style scoped>
 #nav {
-  border-bottom: 5px solid white;
+  border-bottom: 1px solid white;
 }
 </style>

@@ -1,24 +1,28 @@
 <template>
-  <div class="home">
-    <h1 class="title">{{ getUser }}</h1>
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <section class="hero is-bold is-light is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title">
+          Welcome!
+        </h1>
+        <h2 class="subtitle">
+          Please choose tabs and your actions.
+        </h2>
+        <Tabs></Tabs>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
-
+import Tabs from '@/components/Tabs.vue';
 export default {
   name: 'Home',
   components: {
-    HelloWorld,
+    Tabs,
   },
-  computed: {
-    getUser() {
-      return this.$store.state.user;
-    },
+  created() {
+    this.$store.dispatch('getItems');
   },
 };
 </script>
