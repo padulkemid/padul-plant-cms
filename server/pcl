@@ -75,5 +75,5 @@ TOKEN=$(login_user user_login_test.json | jq -r .token)
 # list | jq '.'
 # create_item data_test.json | jq '.'
 # list_id 2 | jq '.'
-get_users | jq '.'
-# create_user data_test.json | jq '.'
+# get_users | jq '.'
+create_user data_test.json | jq '.'
