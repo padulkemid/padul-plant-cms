@@ -2,7 +2,10 @@
   <section>
     <b-tabs position="is-centered" type="is-toggle">
       <b-tab-item label="Products">
-        <h1 class="subtitle">List of Products</h1>
+        <h1 class="subtitle">
+          <b>List of Products</b><br />
+          Click plant names to reveal details.
+        </h1>
         <Table :items="'products'"></Table>
       </b-tab-item>
 
