@@ -2,8 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import { login } from '@/functions/login.js';
-import { products } from '@/functions/items.js';
 import { users } from '@/functions/user.js';
+import { products, newProduct, editProduct, deleteProduct } from '@/functions/items.js';
 
 Vue.use(Vuex);
 
@@ -53,6 +53,16 @@ const store = new Vuex.Store({
         .catch((e) => {
           console.log(e);
         });
+    },
+    postItems(_, payload) {
+      return newProduct(payload);
+    },
+    editItem(_, payload) {
+      const { data, id } = payload;
+      return editProduct(data, id);
+    },
+    deleteItem(_, id) {
+      return deleteProduct(id);
     },
     getUsers({ commit }) {
       users()

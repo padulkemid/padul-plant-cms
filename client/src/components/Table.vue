@@ -1,10 +1,11 @@
 <template>
   <div>
     <template v-if="this.items == 'products'">
-      <div class="buttons">
+      <div class="buttons is-centered">
         <b-button type="is-info" @click="showSearch = !showSearch">
           Search by name
         </b-button>
+        <AddForm formName="Add new Products" />
       </div>
       <b-table
         :data="getProducts"
@@ -13,7 +14,7 @@
         hoverable
         mobile-cards
         paginated
-        per-page="10"
+        per-page="6"
         detailed
         detail-key="id"
         :show-detail-icon="false"
@@ -23,10 +24,6 @@
         aria-current-label="Current page"
       >
         <template slot-scope="props">
-          <b-table-column field="id" label="ID" width="40" numeric headerClass="is-primary">
-            {{ props.row.id }}
-          </b-table-column>
-
           <b-table-column
             field="name"
             label="Plant Name"
@@ -75,16 +72,68 @@
                   <b>Updated on </b> {{ new Date(props.row.updatedAt).toString().slice(0, 21) }}
                 </div>
                 <div class="buttons">
-                  <button class="button is-info is-outlined">
+                  <button @click="editItem(props.row)" class="button is-info is-outlined">
                     Edit
                   </button>
-                  <button class="button is-danger is-outlined">
+                  <button @click="deleteItem(props.row.id)" class="button is-danger is-outlined">
                     Delete
                   </button>
                 </div>
               </div>
             </div>
           </article>
+          <b-modal :active.sync="showEdit" has-modal-card trap-focus aria-role="dialog" aria-modal>
+            <form @submit.prevent="submitEdit">
+              <div class="modal-card" style="width: auto">
+                <header class="modal-card-head">
+                  <p class="modal-card-title">Edit Product</p>
+                </header>
+                <section class="modal-card-body">
+                  <b-field label="Plant Name">
+                    <b-input
+                      v-model="form.name"
+                      type="text"
+                      placeholder="Your plant name..."
+                      maxlength="20"
+                      required
+                    >
+                    </b-input>
+                  </b-field>
+
+                  <b-field label="Image URL">
+                    <b-input
+                      v-model="form.image_url"
+                      type="url"
+                      placeholder="Paste your image url..."
+                      required
+                    >
+                    </b-input>
+                  </b-field>
+
+                  <b-field label="Price">
+                    <b-input
+                      v-model="form.price"
+                      type="number"
+                      placeholder="Rp..."
+                      min="5000"
+                      max="50000000"
+                      step="any"
+                      required
+                    >
+                    </b-input>
+                  </b-field>
+
+                  <b-field label="Stock">
+                    <b-numberinput min="0" v-model="form.stock"> </b-numberinput>
+                  </b-field>
+                </section>
+                <footer class="modal-card-foot">
+                  <button class="button" type="button" @click="showEdit = false">Close</button>
+                  <button class="button is-primary" @click="submitEdit">Edit!</button>
+                </footer>
+              </div>
+            </form>
+          </b-modal>
         </template>
       </b-table>
     </template>
@@ -114,9 +163,14 @@
 </template>
 
 <script>
+import AddForm from '@/components/AddForm.vue';
+
 export default {
   name: 'Table',
   props: ['items'],
+  components: {
+    AddForm,
+  },
   computed: {
     getProducts() {
       const items = this.$store.state.items;
@@ -131,10 +185,75 @@ export default {
     toggle(row) {
       this.$refs.table.toggleDetails(row);
     },
+    editItem(data) {
+      this.showEdit = true;
+      this.form.id = data.id;
+      this.form.name = data.name;
+      this.form.image_url = data.image_url;
+      this.form.price = data.price;
+      this.form.stock = data.stock;
+    },
+    submitEdit() {
+      const { id, name, image_url, price, stock } = this.form;
+      const data = {
+        name,
+        image_url,
+        price: Number(price),
+        stock,
+      };
+
+      const send = {
+        data,
+        id,
+      };
+
+      this.$store.dispatch('editItem', send).then((res) => {
+        if (res.success) {
+          this.$buefy.toast.open({
+            message: 'Success edit data!',
+            type: 'is-info',
+          });
+          this.$store.dispatch('getItems');
+          this.showEdit = false;
+        } else {
+          this.$buefy.toast.open({
+            message: res.message,
+            type: 'is-danger',
+          });
+        }
+      });
+    },
+    deleteItem(id) {
+      this.$buefy.dialog.confirm({
+        title: 'Deleting product...',
+        message:
+          'Are you sure you want to <b>delete</b> this product? This action cannot be undone.',
+        confirmText: 'Delete!',
+        type: 'is-danger',
+        hasIcon: true,
+        onConfirm: () => {
+          this.$store.dispatch('deleteItem', id).then(() => {
+            this.$buefy.toast.open({
+              message: 'Successfully delete item!',
+              type: 'is-warning',
+            });
+            this.$store.dispatch('getItems');
+          });
+        },
+      });
+    },
   },
   data() {
     return {
       showSearch: false,
+      showEdit: false,
+      form: {
+        id: 0,
+        name: '',
+        image_url: '',
+        price: '',
+        stock: 0,
+      },
     };
   },
 };
