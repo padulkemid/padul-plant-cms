@@ -1,5 +1,16 @@
 # PadulJualan Server Setup 👍🏼🤸🏽‍♂️
 
+## Commands
+
+### Contributing
+
+  - First run `npm install` to get all packages.
+  - Then run `npm run gen:dev` to generate database for development.
+  - Add / Edit / Remove stuffs.
+  - To lint ( using [Eslint! 🧾](https://github.com/eslint/eslint) ) run `npm run lint` or `npm run lint:fix`.
+  - To test ( using [Jest! 🤡](https://github.com/facebook/jest) ) run `npm run test`.
+  - Auto hooks is installed ( using [Husky! 🐶](https://github.com/typicode/husky) ), before commiting and push  
+  `npm` will lint, fix and testing your code.
 
 ## Features ✨✨✨
 
