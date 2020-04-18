@@ -1,6 +1,19 @@
-# client
+# PadulJualan ✌🏽😋
 
-## Project setup
+## Features ✨✨✨
+
+### Main Configurations
+
+  - Built with Vue.js
+  - Integrations system with Vuex
+  - Routing system with Vue-Router
+
+### Deploy link
+
+  - https://ecommerce-cms-padul.firebaseapp.com
+  - https://ecommerce-cms-padul.web.app
+
+## Project setup 🤯
 ```
 npm install
 ```
@@ -19,6 +32,8 @@ npm run build
 ```
 npm run lint
 ```
+### Deployments
+```
+npm run deploy
+```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
